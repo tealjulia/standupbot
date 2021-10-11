@@ -2,14 +2,9 @@ import os
 import time
 import logging
 import random
-import schedule
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 from apscheduler.schedulers.blocking import BlockingScheduler
-
-sched = BlockingScheduler()
-
-@sched.shuffle_user('cron', day_of_week='mon-fri', hour=9)
 
 
 def shuffle_users(slack_client):
@@ -45,9 +40,12 @@ def send_message(slack_client):
     logging.error('Request to Slack API Failed: {}.'.format(err.response.status_code))
     logging.error(err.response)
 
+
 if __name__ == "__main__":
 
   SLACK_BOT_TOKEN = os.environ['SLACK_BOT_TOKEN']
   slack_client = WebClient(SLACK_BOT_TOKEN)
-
-sched.start()
+  sched = BlockingScheduler()  
+  sched.add_job(lambda: send_message(slack_client), trigger='cron', day_of_week='mon', hour=19)
+  sched.add_job(lambda: send_message(slack_client), trigger='cron', day_of_week='tue-fri', hour=9)
+  sched.start()
