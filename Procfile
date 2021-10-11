@@ -1,1 +1,1 @@
-web: python3 scheduled.py
+web: python scheduled.py
