@@ -45,11 +45,11 @@ if __name__ == "__main__":
   SLACK_BOT_TOKEN = os.environ['SLACK_BOT_TOKEN']
   slack_client = WebClient(SLACK_BOT_TOKEN)
 
-  schedule.every().monday.at("9:00").do(lambda: send_message(slack_client))
-  schedule.every().tuesday.at("9:00").do(lambda: send_message(slack_client))
-  schedule.every().wednesday.at("9:00").do(lambda: send_message(slack_client))
-  schedule.every().thursday.at("9:00").do(lambda: send_message(slack_client))
-  schedule.every().friday.at("9:00").do(lambda: send_message(slack_client))
+  schedule.every().monday.at("09:28").do(lambda: send_message(slack_client))
+  schedule.every().tuesday.at("08:58").do(lambda: send_message(slack_client))
+  schedule.every().wednesday.at("08:58").do(lambda: send_message(slack_client))
+  schedule.every().thursday.at("08:58").do(lambda: send_message(slack_client))
+  schedule.every().friday.at("08:58").do(lambda: send_message(slack_client))
 
 
   while True:

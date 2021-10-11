@@ -1,1 +1,1 @@
-web: python scheduled.py
+web: python main.py
