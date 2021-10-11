@@ -5,6 +5,11 @@ import random
 import schedule
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
+from apscheduler.schedulers.blocking import BlockingScheduler
+
+sched = BlockingScheduler()
+
+@sched.shuffle_user('cron', day_of_week='mon-fri', hour=9)
 
 
 def shuffle_users(slack_client):
@@ -45,13 +50,4 @@ if __name__ == "__main__":
   SLACK_BOT_TOKEN = os.environ['SLACK_BOT_TOKEN']
   slack_client = WebClient(SLACK_BOT_TOKEN)
 
-  schedule.every().monday.at("09:28").do(lambda: send_message(slack_client))
-  schedule.every().tuesday.at("08:58").do(lambda: send_message(slack_client))
-  schedule.every().wednesday.at("08:58").do(lambda: send_message(slack_client))
-  schedule.every().thursday.at("08:58").do(lambda: send_message(slack_client))
-  schedule.every().friday.at("08:58").do(lambda: send_message(slack_client))
-
-
-  while True:
-    schedule.run_pending()
-    time.sleep(1)
+sched.start()
