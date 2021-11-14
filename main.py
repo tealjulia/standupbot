@@ -46,8 +46,7 @@ if __name__ == "__main__":
   SLACK_BOT_TOKEN = os.environ['SLACK_BOT_TOKEN']
   slack_client = WebClient(SLACK_BOT_TOKEN)
   sched = BlockingScheduler()  
-  sched.add_job(lambda: send_message(slack_client), trigger='cron', day_of_week='sat', hour=17, minute=40)
-  sched.add_job(lambda: send_message(slack_client), trigger='cron', day_of_week='sat', hour=18, minute=1)
-  sched.add_job(lambda: send_message(slack_client), trigger='cron', day_of_week='sat', hour=18, minute=2)
-  sched.add_job(lambda: send_message(slack_client), trigger='cron', day_of_week='tue-fri', hour=8, minute=59)
+  sched.add_job(lambda: send_message(slack_client), trigger='cron', day_of_week='sun', hour=2, minute=10)
+  sched.add_job(lambda: send_message(slack_client), trigger='cron', day_of_week='sun', hour=2, minute=11)
+  sched.add_job(lambda: send_message(slack_client), trigger='cron', day_of_week='tue-fri', hour=16, minute=59)
   sched.start()
